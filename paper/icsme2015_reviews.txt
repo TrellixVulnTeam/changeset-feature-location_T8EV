@@ -1,0 +1,114 @@
+----------------------- REVIEW 1 ---------------------
+PAPER: 4
+TITLE: Modeling Changeset Topics for Feature Location
+AUTHORS: Christopher Corley, Kelly Kashuda and Nicholas A. Kraft
+
+
+----------- REVIEW -----------
+The authors present a new approach in the context of feature location. They use information available in the a software configuration management system to incrementally perform concept location, so reducing time to perform such a kind of task. I found the idea behind the authors’ proposal very interesting even if it is not completely new in the context of software maintenance. The results support the validity of the new approach. The paper flow is adequate even if in some points I had some difficulties. For such difficulty I was not able to be completely confident with the the work done. Also, further details and justifications could be provided by the authors in the experimental part of the paper. All in all, I’m happy enough with the work done. It is one of the best papers I reviewed till now this year at ICSME.
+
+In the following I’ll elaborate on the weakness points I see. I hope the authors will found them useful.
+
+In the motivation part of the introduction, there are some points that seem contrasting each other. In particular, the authors wrote: “Indeed, given the current state-of-the-art in TR, it is impossible for an FLT to satisfy all three criteria while following the standard methodology.” Did Rao [10] and Hoffman at al. [9] make a contribution to satisfy all the three criteria? Reading the paper (and the Introduction, in particular) it seems YES.
+
+Online (using fold-in and fold-out) LSI has been also applied in the context of architecture recovery. Mentioning this paper in the introduction section could further motivate your wok:
+
+** Michele Risi, Giuseppe Scanniello, Genoveffa Tortora: Using fold-in and fold-out in the architecture recovery of software systems. Formal Asp. Comput. 24(3): 307-330 (2012)
+
+The part where the approach is highlighted in the introduction section needs to be rewritten because in the current form is not easy to follow. I read that paragraph more and more, but my comprehension level did not change: completely unclear.
+
+Please discuss better on [10] and [18] in the related work section. In addition, it is not completely clear to me what the difference is between the proposed approach and [28].
+
+Regarding the experimental part of the paper, I found very hard to understand the methodology (especially second paragraph). Last paragraph, the authors mentioned the dataset by Dit et al. Was the dataset by Moreno et al  treated differently? Why?
+
+Reading the description of the experiment, I was not able to understand whether the authors simulated the use of GitHub. I mean, were all the applications and the change sets in the used datasets in GitHub?
+
+Last paragraph in section IV.E is not clear. I mean the place where the authors justify why RQ2 has been studied only on one dataset.
+
+In section IV.F, the authors discussed on the fact that the p-value was greater than 0.05. In particular, they wrote: “This suggests that changeset topics are just as accurate as snapshot topics at the method-level, especially since there is a lack of statistical significance for any of the cases.”  Since the null hypothesis has not been rejected, the authors can only discuss on descriptive statistics. That it, it seems that the authors accept the null hypothesis and this is definitively incorrect.
+
+A statistical test (i.e., that chosen) verifies the presence of significant difference between two groups (in your case), but it does not provide any information about the magnitude of such a difference (if present). The magnitude of such a difference could be computed using a (non-parametric) effect size measure (e.g., Cliff’s d). You could also use the average percentage improvement/reduction.
+
+Why the authors did not analyze execution time?
+
+In the threats to validity you should also consider biases related to the statistical analysis performed (Conclusion validity). The readability could improve organizing threats in: Internal, External, Conclusion, and Construct.
+
+
+Typing and formatting minor issues:
+
+At the end of section III.C, there is (between brackets) a strange symbol.
+
+Figure 2 is not compressible if the paper is printed black and white.
+
+Please remove orphans.
+
+Section 4.B - it is not so good reading the description of the experimental objects as the authors did.
+
+
+----------------------- REVIEW 2 ---------------------
+PAPER: 4
+TITLE: Modeling Changeset Topics for Feature Location
+AUTHORS: Christopher Corley, Kelly Kashuda and Nicholas A. Kraft
+
+
+----------- REVIEW -----------
+This paper proposes a topic-modeling-based feature location technique in which the text retrieval model (i.e., topic model) is built incrementally from source code history. The technique uses an online learning algorithm to train topic models based on change sets, and thus can maintain an up-to-date model without incurring computational cost associated with retraining traditional snapshot-based topic models. The proposed technique has been evaluated and the results indicate that the accuracy of the technique is similar to that of a snapshot-based feature location technique.
+
+This paper reports an interesting exploration of applying incrementally built topic models for feature location. It has the potential of improving current IR-based feture location methods with lower computational cost on building text retrieval models. But I think the paper still has a large space to improve.
+First, the motivation of the paper is not clear and it is not well reflected in the evaluation. It seems that the main benefit of the proposed technique is the saving of computational cost associated with retraining traditional snapshot-based topic models. However, there is no analysis about how much computational cost can be saved. If the training of a snapshot-based topic model only takes a short time (e.g., several minutes), it is acceptable that the topic model is retrained for each release. Moreover, the saving of computational cost is not evaluated in the experimental study.
+Second, the proposed technique is not well described. In the section presenting the technique (Section III), Section III-A and III-C respectively presents terminology and explains the reason why change set is used. Section III-B introduces the proposed technique, which is very short. Some important details are missing, for example how change set corpus are combined with snapshot corpus in training topic models? The process described in Figure 1 (B) does not reflect the incremental manner of the proposed technique.
+
+
+----------------------- REVIEW 3 ---------------------
+PAPER: 4
+TITLE: Modeling Changeset Topics for Feature Location
+AUTHORS: Christopher Corley, Kelly Kashuda and Nicholas A. Kraft
+
+
+----------- REVIEW -----------
+The paper presents a topic-modeling-based Feature Location Technique (FLT) where, to reduce the computational cost, the model is updated incrementally from the changesets of commits from the project history instead of entire snapshots. The approach is evaluated on 1,200 defects on publicly available dataset (from 14 open-source Java projects) and is shown to exhibit accuracy not lower than the accuracy of more traditional models built on entire snapshots. The data and source code for the analysis are provided in an online appendix.
+
+The idea is novel and the approach has potential. Not much work has addressed the issue of incremental model building in IR based feature location (the paper misses some related work – see below). The motivation behind building a model incrementally is to reduce the computational cost of rebuilding a model from every snapshot. The approach presented in the paper is sensible and the results indicate that it is a direction worth following. However, the paper also has several points where it needs some improvement.
+
+The original motivation suggests that the changesets will update the model incrementally. My expectation was that every changeset will be considered separately, i.e., the model will be updated using a changeset. However, neither of the two research questions actually evaluates the approach in that setting. In RQ1 the changeset-based model is built using all changesets at once. In RQ2, the changesets are grouped into partitions based on the bug report that they are linked to and the model is updated using a partition. The first question here is why grouping changesets and why not updating the model after each commit? And then if a grouping is to be made, why not approximate a more realistic setting, i.e., update the model with every consecutive 10 commits, for example. Consecutive commits will address different bugs and thus will certainly have different topic distribution. My doubt here is to what extent the grouping in RQ2 may have introduced a bias in the results? By the w!
+ ay, the part describing the historical simulation is somewhat confusing – at least I had to read it twice to fully understand what exactly is being done.
+
+When investigating the accuracy of the models built on the changesets the thresholds are selected without justification and no tuning. For instance, for the number topic models in all analyzed projects is fixed to 500. The paper justifies the lack of parameter tuning with the fact that the "goal is to show the performance of the changeset-based FLT against snapshot-based FLT under the same conditions" and that "the measurements collected are fair and that the results are not influenced by selective parameter tweaking". However, poor selection of the parameters may lead to poor results and thus unrealistic optimism that the proposed changeset-based FLT performs as good as traditional snapshot-based FLTs. This doubt is somewhat confirmed by results shown in Tables 1 and 2: The Mean Reciprocal Rank (MRR) is used to measure the effectiveness of a FLTs for a set of queries; the higher the value the better the result. The values for MRR shown in Tables 1 and 2 are quite low and th!
+ is is true for both models. For example, for the project Pig v0.8.0, the MRR is ~ 0.011. This score of MRR would mean that the minimum rank for a relevant class would be on average ~ 90 (out of 442 classes in this project). The MRR reported by Moreno et al. varies depending on the settings and type of information that is considered but stays between 0.18 and 0.26 for the same project. This corresponds to ranks 6 and 4 (again out of 442). Thus, the doubt here is that the results of the snapshot-based FLT using the selected parameters are poor and the only thing that one can conclude is that the changeset-based FLT is not making the poor results worse. Now whether the poor results are due to the underlying techniques (i.e., LDA and-or LSI) or to the parameter selection only is not clear but is probably worth investigating.
+
+RQ1 should be rephrased maybe as a hypothesis “Changeset-based FLT is less accurate than snapshot based FLT”. Then the data shows that this cannot be proved.
+
+Regarding RQ2, it is not clear how the accuracy's "fluctuation" of the CFL technique is measured as a project evolves. I do not think the MRR metric by itself measures such fluctuation, or at least this is not explained in the paper. The MRR only measures accuracy. I would think that series analysis on the MRRs across time would be the way to go or other analysis of this kind. Now, it seems that the goal was onlu to compare the accuracy when changesets are used to incrementally update the topic model, as opposed to update the model at once with all the changesets. Unfortunately, it is not clear whether what the goal really is. I suggest to clarify this issue and perhaps reformulate RQ2. After all, the main goal of the paper is to test how the CFL would perform in a realistic environment where the model is incrementally updated with changes in commits.
+
+The paper omits the LSI results “for brevity”. If they are omitted completely, it is best not to even mention them. The best thing to do is to at least mention how they compare wrt LDA.
+
+Detailed comments:
+p1:
+- "By training an online learning algorithm using changesets, the FLT maintains an up-to-date model without incurring the non-trivial computational cost associated with retraining traditional FLTs.": As shown in Fig. 1 the snapshots are still used for indexing. Thus, the computational cost is saved in the process of building the topic model. What is exactly the saved computational cost? To better motivate the paper I would recommend to give a citation or an example of how long it takes to create a topic model for a large system such as eclipse using LDA. Also, it is a good idea to provide the cost saving of the Online LDA technique, compared to the standard LDA.
+- "It follows from the first two observations (1: Like a class/method definition, a changeset has program text; 2: Unlike a class/method definition, a changeset is immutable.) that it is possible for an FLT following our methodology to satisfy all three of the criteria above. ": It is not clear how the first criterion is satisfied, i.e., "(1) accurate like a TM-based FLT"
+- "We then used a subset of over 600 defects and features to conduct a historical simulation that demonstrates how the FLTs perform as a project evolves.": Why 600?
+- The preprocessing often includes stemming, but stemming is not mentioned here. Later (p.6, Section IV Study) it becomes clear that no stemming is applied without justifying why.
+
+p2:
+- "Normalizing: replace each upper case letter with the corresponding lower case letter": Lawrie et al. use “normalization” for vocabulary normalization (i.e., the alignment of the vocabulary found in source code with that found in other software artifacts). See: D. Lawrie, D. Binkley, and C. Morrell. Normalizing source code vocabulary. In Proceedings of the Working Conference on Reverse Engineering (WCRE), pages 3-12, 2010
+- "corpus is a set of documents (i.e., methods)": "i.e.," -> "e.g.,"
+
+p5:
+- Section IV.C. (Methodology) can be broken down into subsections based on the RQs.
+- To answer RQ2 (Does the accuracy of a changeset-based FLT fluctuate as a project evolves?), the paper describes the so-called historical simulation where commits are related to each query (or issue) and partitions of mini-batches of changesets are created. The model is then updated using a mini-batch. An index of topic distributions with the snapshot corpus is then inferred. I don't understand why for the historical simulation, commits are grouped into partitions of mini-batches instead of updating the model after every commit.
+- "on all documents extracted." -> extracted documents
+
+p6:
+- The paragraph starting with "After extracting tokens, we split ... " is not needed. The preprocessing, except the stemming, is already explained in Section II.A.
+- Thresholds are missing justifications: K, the number of topics, is chosen to be 500; the two parameters that control how much influence a new mini-batch has on the model when training are 1024 and 0.9. No justification is given for the selected values. What are the values selected in related works?
+
+p10:
+- Ref. [2]: the publication date is 2013.
+- The references should be consistent. For example, the venue of the references 7, 17, 19 and 20 have the following form: "Software Engineering, IEEE Transactions on"; instead of "IEEE Transactions on Software Engineering".
+
+Missing references to related work:
+Hsin-yi Jiang, Tien N. Nguyen, Carl K. Chang, and Fei Dong, "Traceability Link Evolution Management with Incremental Latent Semantic Indexing", in Proceedings of the 31st IEEE International Computer Software and Applications Conference (IEEE COMPSAC 2007), pages 309-316, July 24-27,2007
+
+Hsin-yi Jiang, Tien N. Nguyen, Ing-Xiang Chen, Hojun Jaygarl, Carl K. Chang, "Incremental Latent Semantic Indexing for Automatic Traceability Link Evolution Management", in Proceedings of the 23rd ACM/IEEE International Conference on Automated Software Engineering (ACM/IEEE ASE 2008), September 15-19, 2008
+
+Ratanotayanon, Sukanya, Hye Jung Choi, and Susan Elliott Sim. "Using transitive changesets to support feature location." Proceedings of the IEEE/ACM International Conference on Automated Software Engineering, 2010
