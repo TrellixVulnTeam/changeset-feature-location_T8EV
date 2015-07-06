@@ -81,6 +81,8 @@ for kind in ['lda']: # 'lsi']:
             for project in projects:
                 if project.level != level:
                     continue
+                if project.name not in rq2_projects:
+                    continue
 
                 desc = ' '.join([project.printable_name, project.version])
 
