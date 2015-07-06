@@ -325,7 +325,7 @@ with 2 of the 4 statistically significant at $p<0.01$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Discussion}
+\section{Discussion}
 
 The results outlined in the previous section warrants some qualitative
 discussion.  In particular, our analysis shows significant affects between
@@ -342,6 +342,9 @@ to that of a snapshot-based FLT but without the retraining cost.
 \label{fig:em}
 \end{figure*}
 
+\subsection{RQ1}
+\todo{redo these numbers}
+
 Figure~\ref{fig:em} shows the effectiveness measures for methods and classes
 across all systems. The figure suggests that snapshot-based models and
 changeset-based models have similar results overall with changesets performing
@@ -350,7 +353,6 @@ for each model.  With respect to RQ1, we will investigate the queries and
 effectiveness measures between the batch snapshot and batch changesets in
 detail.
 
-\todo{redo these numbers}
 
 For the 1214 successful queries of classes,
 each query returns the same effectiveness measure 30 out of 1214 times, or about 2.5\% of the time.
@@ -366,7 +368,9 @@ For 65 queries (10.3\%), the effectiveness measure is within 10 ranks of each ot
 For 151 queries (24.0\%), the effectiveness measure is within 50 ranks of each other.
 The remaining 478 queries (76.0\%) perform noticibly different ($> 50$ ranks apart).
 
-Figure~\ref{fig:em} shows the effectiveness measures for methods and classes
+\subsection{RQ2}
+
+Figure~\ref{fig:em} also shows the effectiveness measures for methods and classes
 across the 6 systems considered in RQ2. The figure shows that the historical
 simulation outperforms both batch evaluations, but does not help to understand
 how each feature query performs for each model.  With respect to RQ2, we will
@@ -387,54 +391,7 @@ For 23 queries (3.9\%), the effectiveness measure is within 10 ranks of each oth
 For 77 queries (12.9\%), the effectiveness measure is within 50 ranks of each other.
 The remaining 518 queries (87.1\%) perform noticibly different ($> 50$ ranks apart).
 
-\begin{comment}
-\input{tables/argoumlqueries}
-
-ArgoUML v0.26.2 feature 5258 has an effectiveness measure of 1 under the
-snapshot-based model and 8138 under the changeset-based model, while feature
-5088 had 1 under the changeset-based model and 124 under the snapshot-based
-model.  Table~\ref{table:argoumlqueries} shows the bag-of-words representation
-of each feature query.
-
-Feature 5258 returns 3 related snapshot topics: 194 (58\%), 226 (18\%), and 464 (14\%).
-The most related snapshots topics of the first relevant method at rank 1,
-\texttt{GoClassifierToInstance.getRuleName()},
-are also 194 (82\%), 226 (6\%), and 464 (4\%).
-Hence, the snapshot model performs as expected.
-Feature 5258 returns 2 related changeset topics: 250 (48\%) and 365 (43\%).
-Unforunately, the first relevant method at rank 8138,
-\texttt{GoClassifierToInstance.getRuleName()},
-returns 2 different changeset topics: 432 (76\%) and 332 (17\%).
-However, with the exception of changeset topic 432, the top words in these
-topics are similar to that of the query. Changeset topic 432 appears to be a general
-topic, consisting of words like ``jar'' (8\%), ``argouml'' (6\%), and ``org'' (5\%).
-
-Feature 5088 returns 18 snapshot topics, with 3 highly ($> 10\%$) related: 281 (19\%), 283 (13\%), and 38 (11\%).
-There are 6 snapshot topics for the first relevant method at rank 142,
-\texttt{XmiWriterMDRImpl.write()},
-and the highly related topics are 283 (56\%), 82 (16\%), and 41 (12\%).
-We note that both each of these contain snapshot topic 283,
-but the feature does not relate as highly to the topic as the method does.
-We also note that the model seems confused about which topics are related to the feature.
-Feature 5088 returns 19 changeset topics, with 3 highly related: 446 (21\%), 426 (12\%), and 472 (11\%).
-The first relevant method at rank 1,
-\texttt{testWritePreviouslyLoadedProfile()},
-returns 10 changeset topics, with 3 highly related: 446 (47\%), 462 (15\%), and 426 (12\%).
-7 out of the 10 changeset topics also appear in the 19 related to the feature.
-Here, the changeset model was able to better discern which topics were related to the feature.
-
-\end{comment}
-
-\begin{comment}
-\input{tables/muqueries}
-
-MuCommander v0.8.5 feature 37 has an effectiveness measure of 1 under the
-snapshot-based model and 303 under the changeset-based model, while feature 142
-had 1 under the changeset-based model and 536 under the snapshot-based model.
-Table~\ref{table:muqueries} shows the bag-of-words representation of each
-feature query.
-
-\end{comment}
+\subsection{Situations}
 
 %%%% Awkwardddddddddd
 
