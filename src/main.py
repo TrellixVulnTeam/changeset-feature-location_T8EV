@@ -1,11 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#
-# [The "New BSD" license]
-# Copyright (c) 2014 The Board of Trustees of The University of Alabama
-# All rights reserved.
-#
-# See LICENSE for details.
 
 from __future__ import print_function
 
@@ -25,9 +19,8 @@ import scipy.stats
 import numpy
 from gensim.corpora import MalletCorpus, Dictionary
 from gensim.models import LdaModel, LsiModel
-from gensim.models.wrappers import LdaMallet
 from gensim.matutils import sparse2full
-from gensim.utils import smart_open
+from gensim.utils import smart_open, to_unicode, to_utf8
 
 import utils
 from corpora import (ChangesetCorpus, SnapshotCorpus, ReleaseCorpus,
