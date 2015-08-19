@@ -17,7 +17,7 @@ manager who wishes to gain understanding of the concepts or features implemented
 in the source code. The \textit{context} of the study spans the version
 histories of 14 open source systems.
 
-\todo{r3: reformulate the RQs}
+%\todo{r3: reformulate the RQs}
 
 Toward the achievement of our goal, we pose the following research questions:
 \begin{description}[font=\itshape\mdseries,leftmargin=10mm,style=sameline]
@@ -78,7 +78,7 @@ where the datasets overlap.
 \end{table}
 
 
-\todo{R1: add words to make this less garbage-y}
+%\todo{R1: add words to make this less garbage-y}
 ArgoUML is a UML diagramming tool\footnote{\url{http://argouml.tigris.org/}}.
 jEdit is a text editor\footnote{\url{http://www.jedit.org/}}.
 JabRef is a BibTeX bibliography management tool\footnote{\url{http://jabref.sourceforge.net/}}.
@@ -125,8 +125,8 @@ the snapshot index with pairwise comparisons.
 \end{enumerate}
 \end{comment}
 
-\todo{r3: found this confusing}
-\todo{r3: why do partitioning as such?}
+%\todo{r3: found this confusing}
+%\todo{r3: why do partitioning as such?}
 For the historical simulation, we take a slightly different approach. We first
 determine which commits relate to each query (or issue) and partition
 mini-batches out of the changesets.  We then proceed by initializing a model for
@@ -152,7 +152,7 @@ mini-batch.
 \end{enumerate}
 \end{comment}
 
-\todo{R1: found this confusing}
+%\todo{R1: found this confusing}
 Since the Dit et al. dataset was extracted from the commit that implemented the
 change, our partitioning is inclusive of that commit.  That is, we update the
 model with the linked commit and infer the snapshot index from that commit.
@@ -171,13 +171,13 @@ Figure~\ref{fig:changeset}.  We implemented our document extractor in Python
 v2.7 using the Dulwich
 library\footnote{\url{http://www.samba.org/~jelmer/dulwich/}} for interacting
 with the source code repository and
-Taser\footnote{\url{https://github.com/nkraft/taser}} for parsing source code.
+Teaser\footnote{\url{https://github.com/nkraft/teaser}} for parsing source code.
 We extract documents from both a snapshot of the repository at a tagged snapshot
 and each commit reachable from that tag's commit.  The same preprocessing steps
 are employed on all extracted documents.
 
 For our document extraction from a snapshot, we first parse each Java file using
-our tool, Taser, which is a text extractor implemented in Java using an open
+our tool, Teaser, which is a text extractor implemented in Java using an open
 source Java 1.5 grammar and ANTLR v3.  The tool extracts documents from the
 chosen source code entity type, either methods or classes.  We consider
 interfaces, enumerations, and annotation types to also be a class.  The text of
@@ -225,7 +225,7 @@ parameters: $\kappa$ and $\tau_0$.  As noted in Hoffman et
 al.~\cite{Hoffman-etal_2010}, it is beneficial to adjust $\kappa$ and $\tau_0$
 to higher values for smaller mini-batches.  These two parameters control how
 much influence a new mini-batch has on the model when training.  We follow the
-recommenations in Hoffman et al.\, choosing $\tau_0=1024$ and $\kappa=0.9$ for
+recommendations in Hoffman et al.\, choosing $\tau_0=1024$ and $\kappa=0.9$ for
 all systems, because the historical simulation often has mini-batch sizes in
 single digits.
 
@@ -354,14 +354,14 @@ effectiveness measure 28 out of 632 times, or about 4.4\% of the time.  Of these
 measure).  For 159 queries (25.2\%), the effectiveness measure is within 10
 ranks of each other.  For 291 queries (46.0\%), the effectiveness measure is
 within 50 ranks of each other.  The remaining 341 queries (53.9\%) perform
-noticibly different ($> 50$ ranks apart).
+noticeably different ($> 50$ ranks apart).
 
 For the 629 successful queries of methods, each query returns the same
 effectiveness measure 12 out of 629 times, or about 1.9\% of the time.  Of these
 12, 7 return an effectiveness measure of 1 (the best possible measure).  For 65
 queries (10.3\%), the effectiveness measure is within 10 ranks of each other.
 For 151 queries (24.0\%), the effectiveness measure is within 50 ranks of each
-other.  The remaining 478 queries (75.9\%) perform noticibly different ($> 50$
+other.  The remaining 478 queries (75.9\%) perform noticeably different ($> 50$
 ranks apart).
 
 \subsection{RQ2}
@@ -378,7 +378,7 @@ effectiveness measure 8 out of 603 times, or about 1.3\% of the time.  Of these
 8, 7 return an effectiveness measure of 1 (the best possible measure).  For 111
 queries (18.4\%), the effectiveness measure is within 10 ranks of each other.
 For 230 queries (38.1\%), the effectiveness measure is within 50 ranks of each
-other.  The remaining 373 queries (61.8\%) perform noticibly different ($> 50$
+other.  The remaining 373 queries (61.8\%) perform noticeably different ($> 50$
 ranks apart).
 
 For the 595 successful queries of methods, each query returns the same
@@ -386,7 +386,7 @@ effectiveness measure 3 out of 595 times, or about 0.5\% of the time.  Of these
 3, all return an effectiveness measure of 1 (the best possible measure).  For 23
 queries (3.9\%), the effectiveness measure is within 10 ranks of each other.
 For 77 queries (12.9\%), the effectiveness measure is within 50 ranks of each
-other.  The remaining 518 queries (87.0\%) perform noticibly different ($> 50$
+other.  The remaining 518 queries (87.0\%) perform noticeably different ($> 50$
 ranks apart).
 
 \subsection{Situations}
@@ -401,7 +401,7 @@ online TM-based FLT trained on the same changesets over time.  Our results are
 mixed between the research questions, hence we end up with four possible
 situations; we will now discuss each of these situations in detail.
 
-\subsubsection{Batch changesets are better than batch shapshot
+\subsubsection{Batch changesets are better than batch snapshot
 \emph{and} batch changesets are better than changesets in the simulated environment}
 
 % Snapshots < Changeset && Batch > Temporal
@@ -420,7 +420,7 @@ allows for the batch model to be more accurate because it is trained on more
 data and reveals feature location research evaluations may not be accurately
 portraying how an FLT would perform in a real scenario.
 
-\subsubsection{Batch changesets are better than batch shapshot
+\subsubsection{Batch changesets are better than batch snapshot
 \emph{and} changesets in the simulated environment are better than batch changesets}
 
 % Snapshots < Changeset && Batch < Temporal
