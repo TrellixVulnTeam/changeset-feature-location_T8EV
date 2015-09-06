@@ -6,7 +6,7 @@
 \let\labelindent\relax
 \makeatother
 
-
+\usepackage[font=small]{caption}
 \usepackage[T1]{fontenc}
 \usepackage[para]{footmisc}
 \usepackage[pdftex]{graphicx}
@@ -50,6 +50,9 @@
 \newcommand{\todo}[1]{\strut\smash{\colorbox{yellow}{\bf TODO: #1}}}
 \setlength\OuterFrameSep{0.5em}
 \setlength\FrameSep{0.5em}
+\clubpenalty = 10000
+\widowpenalty = 10000
+\displaywidowpenalty = 10000
 
 \begin{document}
 \title{Modeling Changeset Topics for Feature Location}
@@ -132,6 +135,7 @@ We thank the anonymous reviewers for their insightful comments and helpful sugge
 This material is based upon work supported
 by the National Science Foundation under Grant No.\ 1156563. % REU grant for KLK
 
+\balance
 %\newpage
 \bibliographystyle{IEEEtran-nourl}
 \bibliography{paper}
